@@ -1,0 +1,315 @@
+<mvc:View controllerName="jbmetadata.Domens.controller.Worklist"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	xmlns:table="sap.ui.table"
+	xmlns:core="sap.ui.core"
+	xmlns:s000="jblibs.s000"
+	xmlns:s006="jblibs.s006"
+	xmlns:semantic= "sap.f.semantic"
+	xmlns:l="sap.ui.layout"
+	xmlns:commons = "sap.ui.commons">	
+
+    <IconTabBar id="bar0"
+	            stretchContentHeight="true"
+	            applyContentPadding="false"
+	            tabDensityMode="Compact"
+	            backgroundDesign="Transparent"
+	            selectedKey="{oViewModel>/iconTabBarSelectedKey}"
+	            select="onSelectTab">
+		<items>
+			<IconTabFilter text="Domens"
+			               id="DomensEditorTable"
+			               icon="sap-icon://table-view">
+				<content>
+	                <f:DynamicPage id="dynamicPage"
+    	               fitContent="true"
+    	               class="sapUiNoContentPadding jbFilterBarHeaderNoPadding"
+    	               headerPinned="false"
+    	               preserveHeaderStateOnScroll="false">
+		            <f:header>
+			            <f:DynamicPageHeader pinnable="false">
+			                <s006:FilterBar id="filterBar" 
+    				            URLAlias="Domens"
+    				            VMSettingEntity="vmDomens"
+    				            VMPersistencyKey="jbcommon_log_Domens"
+    				            firstLine="ModuleID, Type, Fraction, Length"
+    				            URLfilter="true"
+    				            liveMode="true"
+    				            btnShowHide="true"
+    				            btnShowHidePressed="true"
+    				            entityData="Domens"
+    				            SearchFields="DomenName, DomenID"
+    				            ParametersModel="annotation"
+    				            change="onPressFilterBarChange"
+    				            labelPlacement="placeholder"
+    				            alignControls="Start"
+    				            btnMode="standard"
+    				            secondaryControlID="btnTable"
+    				            tableID="table">
+    				        <s006:rightToolbar>
+    				            <Button icon="sap-icon://add" id="addAfterBtn" type = "Transparent" press="onPressCreateAfter"/>
+    					   	    <Button icon="sap-icon://delete" id="deleteDomenAfterBtn" type = "Transparent" press="onPressDomenDelete" enabled="{= ${domensTableModel>/selectedItems}.length &gt; 0}"/>
+    					   	     <s006:BtnTableSettings 
+    						            id="btnTable"
+    						            URLAlias="Domens"
+    						            URLfilter="true"
+    						            VMID=""
+    						            icon="sap-icon://action-settings"
+    						            type="Transparent"
+    					                change="prepareSelect"
+    					                tableID="table"
+    					                ParametersModel="annotation"
+    					                widthColumns="15rem"/>
+    					         <s006:BtnTableExport 
+    					                icon="sap-icon://excel-attachment"
+    					                type="Transparent"
+    					                id="excel"
+    					                tableID="table"/>
+    						     <Button type="Transparent" 
+    						            icon="sap-icon://refresh"
+    						            press="onPressRefresh"/>
+    					        </s006:rightToolbar>
+    				        </s006:FilterBar>
+			            </f:DynamicPageHeader>
+		            </f:header>
+		            <f:content>
+			            <NavContainer height="100%" width="100%">
+				            <table:Table id="table"
+    				             visibleRowCountMode="Auto"
+    				             minAutoRowCount="1"
+    				             enableBusyIndicator="true"
+    				             busyIndicatorDelay="0"
+    				             threshold="160"
+    				             selectionMode="MultiToggle"
+    					         selectionBehavior="Row"
+    					         rowActionCount = "2"
+    					         rowSelectionChange = "onChooseDomenForDelete"
+					         >
+					        <table:columns>
+						        <table:Column id="ProjectID"
+						              sortProperty="ProjectID"
+						              width = "7rem"
+						              >
+							     <Label text="{i18n_domens>tProjectID}"/>
+							     <table:template>
+    								 <HBox alignItems="Center">
+    									<Link text = "{ProjectID}" press="onPressEditRow"/>
+    								</HBox>
+							</table:template>
+						    </table:Column>
+						    <table:Column id="DomenID"
+						              sortProperty="DomenID" width = "7rem"
+						              >
+							<Label text="{i18n_domens>tDomenID}"/>
+							<table:template>
+								<HBox alignItems="Center">
+									<Link text = "{DomenID}" press="onPressEditRow"/>
+								</HBox>
+							</table:template>
+						</table:Column>
+						<table:Column id="ModuleID"
+						              sortProperty="ModuleID"
+						              width = "7rem"
+						              >
+							<Label text="{i18n>tModuleID}"/>
+							<table:template>
+								<HBox alignItems="Center" renderType="Bare">
+									<Text text="{ModuleID}"/>
+								</HBox>
+							</table:template>
+						</table:Column>
+							<table:Column id="DomenName"
+						              sortProperty="DomenName"
+						              width = "5rem"
+						              >
+							<Label text="{i18n_domens>tName}"/>
+							<table:template>
+								<HBox alignItems="Center" renderType="Bare">
+									<Text text="{DomenName}"/>
+								</HBox>
+							</table:template>
+						</table:Column>
+						<table:Column id="Type"
+						              sortProperty="Type"
+						              width = "8rem"
+						              >
+							<Label text="{i18n_domens>tType}"/>
+							<table:template>
+								<HBox alignItems="Center" renderType="Bare">
+									<Text text="{Type}"/>
+								</HBox>
+							</table:template>
+						</table:Column>
+						<table:Column id="Length"
+						              sortProperty="Length"
+						              width = "5rem"
+						              >
+							<Label text="{i18n_domens>tLength}"/>
+							<table:template>
+								<HBox justifyContent ="End" renderType="Bare">
+									<Text text="{Length}"/>
+								</HBox>
+							</table:template>
+						</table:Column>
+						<table:Column id="Fraction" sortProperty="Fraction" width = "5rem">
+							<Label text="{i18n_domens>tFraction}"/>
+							<table:template>
+								<HBox justifyContent ="End" renderType="Bare">
+									<Text text="{Fraction}"/>
+								</HBox>
+							</table:template>
+						</table:Column>
+						
+					</table:columns>
+					<table:rowActionTemplate>
+						<table:RowAction>
+							<table:items>
+								<table:RowActionItem icon="sap-icon://text" type="Custom" press="onPressEditRow" tooltip="{i18n_domens>editRow}"/>
+								<table:RowActionItem icon="sap-icon://duplicate" type="Custom" press="onPressCreateCopyRow" tooltip="{i18n_domens>copyRow}"/>
+					        </table:items>
+						</table:RowAction>
+					</table:rowActionTemplate>
+				</table:Table>
+			</NavContainer>
+		</f:content>
+	</f:DynamicPage>
+	</content>
+	</IconTabFilter>
+	
+	<IconTabFilter text="DomensText" id="DomensEditorTable1" icon="sap-icon://text">
+		<content>
+	        <f:DynamicPage id="dynamicPage1"
+	                       fitContent="true"
+	                       class="sapUiNoContentPadding jbFilterBarHeaderNoPadding"
+	                       headerPinned="false"
+	                       preserveHeaderStateOnScroll="false">
+		<f:header>
+			<f:DynamicPageHeader pinnable="false">
+				<s006:FilterBar 
+				            id="filterBar1" 
+    				        URLAlias="DomensText"
+    				        VMSettingEntity="vmDomensText"
+    				        VMPersistencyKey="jbcommon_log_DomensText"
+    				        firstLine="ProjectID, Language"
+    				        URLfilter="true"
+    				        liveMode="true"
+    				        btnShowHide="true"
+    				        btnShowHidePressed="true"
+    				        entityData="DomensText"
+    				        SearchFields="DomenID, DomenName"
+    				        ParametersModel="annotation1" 
+    				        change="onPressFilterBarChange1"
+    				        labelPlacement="placeholder"
+    				        alignControls="Start"
+    				        btnMode="standard"
+    				        secondaryControlID="btnTable1"
+    				        tableID="table1">
+					<s006:rightToolbar>
+					<Button icon="sap-icon://add" id="addAfterBtn1" type = "Transparent" press="onPressCreateAfter"/>
+					<Button icon="sap-icon://delete" id="deleteTextAfterBtn" type = "Transparent" press="onPressTextDelete"  enabled="{= ${domensTextTableModel>/selectedItems}.length &gt; 0}"/>
+						<s006:BtnTableSettings
+						           id="btnTable1"
+						           URLAlias="AdminLogs"
+						           URLfilter="true"
+						           VMID="" icon="sap-icon://action-settings"
+						           type="Transparent"
+					               change="prepareSelect1"
+					               tableID="table1"
+					               ParametersModel="annotation1"
+					               widthColumns="15rem"/>
+					    <s006:BtnTableExport icon="sap-icon://excel-attachment"
+					                         type="Transparent"
+					                         id="excel1"
+					                         tableID="table1"/>
+						<Button type="Transparent"
+						        icon="sap-icon://refresh"
+						        press="onPressRefresh1"/>
+					</s006:rightToolbar>
+				</s006:FilterBar>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<NavContainer height="100%" width="100%">
+			   	<table:Table id="table1"
+				             visibleRowCountMode="Auto"
+				             minAutoRowCount="1"
+				             enableBusyIndicator="true"
+				             busyIndicatorDelay="0"
+				             threshold="160"
+				             selectionMode="MultiToggle"
+					         selectionBehavior="Row"
+					         rowActionCount = "2"
+					         rowSelectionChange = "onChooseTextForDelete">
+					<table:columns>
+						 <table:Column id="DomenID1"
+						              sortProperty="DomenID"
+						              width = "9rem"
+						              >
+							<Label text="{i18n_domens>tDomenID}"/>
+							<table:template>
+								<HBox alignItems="Center">
+									<Link text = "{DomenID}" press="onPressEditRow"/>
+								</HBox>
+							</table:template>
+						</table:Column>
+						<table:Column id="DomenName1"
+						              sortProperty="DomenName">
+							<Label text="{i18n_domens>tName}"/>
+							<table:template>
+								<HBox alignItems="Center">
+									<Text text="{DomenName}"/>
+								</HBox>
+							</table:template>
+						</table:Column>
+						<table:Column id="ModuleText"
+						              sortProperty="ModuleText"
+					                    >
+							<Label text="{i18n>tModuleText}"/>
+							<table:template>
+								<HBox alignItems="Center" renderType="Bare">
+									<core:Icon src="{parts:['ModuleText', 'ModuleIcon'], formatter : '.formatter.checkIcon'}" class="sapUiTinyMarginEnd"/>
+									<Text text="{ModuleText}"/>
+								</HBox>
+							</table:template>
+						</table:Column>
+						<table:Column id="Language1"
+						              sortProperty="Language"
+						              >
+							<Label text="{i18n>tLanguage}"/>
+							<table:template>
+								<HBox alignItems="Center" renderType="Bare">
+									<Text text="{Language}"/>
+								</HBox>
+							</table:template>
+						</table:Column>
+						<table:Column id="Description1"
+						              sortProperty="Description"
+						              >
+							<Label text="{i18n>tDescription}"/>
+							<table:template>
+								<HBox alignItems="Center" renderType="Bare">
+									<Text text="{Description}"/>
+								</HBox>
+							</table:template>
+						</table:Column>
+						
+						
+						</table:columns>
+						<table:rowActionTemplate>
+						<table:RowAction>
+							<table:items>
+								<table:RowActionItem icon="sap-icon://edit-outside" type="Custom" press="onPressEditRow" tooltip="{i18n_domens>editRow}"/>
+								<table:RowActionItem icon="sap-icon://duplicate" type="Custom" press="onPressCreateCopyRow" tooltip="{i18n_domens>copyRow}"/>
+					        </table:items>
+						</table:RowAction>
+					</table:rowActionTemplate>
+				</table:Table>
+			</NavContainer>
+		</f:content>
+	</f:DynamicPage>
+	</content>
+	</IconTabFilter>
+	</items>
+	</IconTabBar>
+</mvc:View>

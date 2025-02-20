@@ -1,0 +1,61 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core"
+   xmlns:s000 = "jblibs.s000">
+   <Dialog
+      id="TextDialog"
+       title="{action>/rowAction}"
+      class  = "sapUiContentPadding">
+   	<content>
+   		<VBox>
+	   		<Label text= "ProjectID" labelFor  = "inpProjectID1" required = "true"/>
+	   		<s000:Select id = "inpProjectID1" lookUpEntitySet="Projects" lookUpText = "ProjectID" lookUpKey = "ProjectID" lookUpSort = "ProjectID" lookUpSearchField = "ProjectID" value = "{ProjectID}" enabled = "{=${action>/rowAction} !== 'Edit Row'}" valueState = "{=${action>/keysValueState}}" change = "unlockInputs"/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "ModuleID" labelFor  = "inpModuleID1" required = "true"/>
+	   		<s000:Select id = "inpModuleID1" lookUpEntitySet="Modules" lookUpText = "ModuleID" lookUpKey = "ModuleID" lookUpSort = "ModuleID" lookUpSearchField = "ModuleID" value = "{ModuleID}" enabled = "{=${action>/rowAction} !== 'Edit Row'}" valueState = "{=${action>/keysValueState}}" change = "unlockInputs"/>
+	   	</VBox>
+	   		<VBox>
+	   		<Label text= "DomenID" labelFor  = "inpDomenID1" required = "true"/>
+	   		<s000:Select id = "inpDomenID1" lookUpEntitySet="vDomensDomenID" lookUpText = "DomenID" lookUpKey = "DomenID" lookUpSort = "DomenID" lookUpSearchField = "DomenID" value = "{DomenID}" maxLength = "128" enabled = "{=${action>/rowAction} !== 'Edit Row'}"  valueState = "{=${action>/keysValueState}}" change = "unlockInputs"/>
+	   	</VBox>
+	   	<!--<VBox>
+	   		<Label text= "Language" labelFor  = "inpLanguage1" required = "true"/>
+	   		<MaskInput mask = '**' placeholderSymbol = "A" id = "inpLanguage1" value = "{Language}" maxLength = "2" enabled = "{=${action>/rowAction} !== 'Edit Row'}" valueState = "{=${action>/keysValueState}}" width = "100%" liveChange = "unlockInputs">
+        	   	<rules>
+            	   <MaskInputRule/>
+            	</rules>
+    	   	</MaskInput>
+	   	</VBox>-->
+	   	<VBox>
+	   		<Label text= "Language" labelFor  = "inpLanguage1" required = "true"/>
+	   		<s000:Select id = "inpLanguage1" lookUpEntitySet="Languages" lookUpText = "LanguageID" lookUpKey = "LanguageID" lookUpSort = "LanguageID" lookUpSearchField = "LanguageID" value = "{Language}" maxLength = "2" enabled = "{=${action>/rowAction} !== 'Edit Row'}"  valueState = "{=${action>/keysValueState}}" change = "unlockInputs"/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "DomenName" labelFor  = "inpDomenName1" required = "true"/>
+	   		<Input id = "inpDomenName1" value = "{DomenName}" maxLength = "60" liveChange = "unlockInputs"/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "DomenDescription" labelFor  = "inpDomenDescription1" required = "true"/>
+	   		<TextArea id = "inpDomenDescription1" value = "{DomenDescription}" width = "100%" maxLength = "255" liveChange = "unlockInputs"/>
+	    </VBox>
+	    <!--<BusyIndicator text = "Please, wait"/>-->
+	   	</content>
+	     <beginButton>
+		   	<Button 
+			 id = "addDialogButton1"
+			 text  = "Save"
+			 press = "onPressSaveEntry"
+			 class = "sapUiSmallMarginEnd"
+			 type = "Transparent"/>
+		 </beginButton>
+	    <endButton>
+		   	<Button 
+			 id = "closeDialogButton1"
+			 text  = "Cancel"
+			 press = "onPressCancelEntry"
+			 class = "sapUiSmallMarginEnd"
+			 type = "Transparent"/>
+		 </endButton>
+   	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,77 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core"
+   xmlns:s000="jblibs.s000"
+   id = "fragmentId">
+   <Dialog
+      id="DomenDialog"
+      title="{action>/rowAction}"
+      class  = "sapUiContentPadding">
+   	<content>
+   		<VBox>
+           	<Label text= "ProjectID" labelFor  = "inpProjectID" required = "true"/>
+	   		<s000:Select id = "inpProjectID" lookUpEntitySet="Projects" lookUpText = "ProjectID" lookUpKey = "ProjectID" lookUpSort = "ProjectID" lookUpSearchField = "ProjectID" value = "{ProjectID}" enabled = "{=${action>/rowAction} !== 'Edit Row'}" valueState = "{=${action>/keysValueState}}" change = "unlockInputs"/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "ModuleID" labelFor  = "inpModuleID" required = "true"/>
+	   		<s000:Select id = "inpModuleID" lookUpEntitySet="Modules" lookUpText = "ModuleID" lookUpKey = "ModuleID" lookUpSort = "ModuleID" lookUpSearchField = "ModuleID" value = "{ModuleID}" enabled = "{=${action>/rowAction} !== 'Edit Row'}" valueState = "{=${action>/keysValueState}}" change = "unlockInputs"/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "DomenID" labelFor  = "inpDomenID" required = "true"/>
+	   		<Input id = "inpDomenID" value = "{DomenID}" maxLength = "128" enabled = "{=${action>/rowAction} !== 'Edit Row'}" valueState = "{=${action>/keysValueState}}" liveChange = "unlockInputs"/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "DomenName" labelFor  = "inpDomenName" required = "true"/>
+	   		<Input id = "inpDomenName" value = "{DomenName}" maxLength = "60" liveChange = "unlockInputs"/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "DomenDescription" labelFor  = "inpDomenDescription" required = "true"/>
+	   		<TextArea id = "inpDomenDescription" value = "{DomenDescription}" width = "100%" maxLength = "255" liveChange = "unlockInputs"/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "Type" labelFor  = "inpType" required = "true"/>
+	   		<s000:Select lookUpEntitySet = "vDomensType" lookUpText = "Type" lookUpKey = "Type" lookUpSort = "Type" lookUpSearchField = "Type" id = "inpType" value = "{Type}"  change = "unlockInputs" maxLength = "20"/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "Length" labelFor  = "inpLength"/>
+	   		<Input id = "inpLength" type  = "Number" value = "{Length}"/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "Fraction" labelFor  = "inpFraction"/>
+	   		<Input id = "inpFraction" type  = "Number" value = "{Fraction}"/>
+	   	</VBox>
+	   	<VBox> 
+	   		<Label text= "Native Field" labelFor  = "inpNativeField" visible = "{=${action>/rowAction} !== 'Create'}"/>
+	   		<Input id = "inpNativeField" value = "{NativeField}" visible = "{=${action>/rowAction} !== 'Create'}"/>
+	   	</VBox>
+	   	<VBox>
+	   		<Label text= "Language" labelFor  = "inpLanguage" required = "true"  visible = "{=${action>/rowAction} !== 'Create'}"/>
+	   		<s000:Select lookUpEntitySet = "Languages" lookUpText = "LanguageID" lookUpKey = "LanguageID" lookUpSort = "LanguageID" lookUpSearchField = "LanguageID" id = "inpLanguage" value = "{Language}" visible = "{=${action>/rowAction} !== 'Create'}" change = "unlockInputs" maxLength = "2"/>
+    	</VBox>
+	    <!--<VBox>
+	   		<Label text= "Language" labelFor  = "inpLanguage" required = "true"  visible = "{=${action>/rowAction} !== 'Create'}"/>
+	   		<MaskInput mask = '**' placeholderSymbol = "A" id = "inpLanguage" value = "{Language}"  enabled = "{=${action>/rowAction} !== 'Copy Row' || ${action>/rowAction} !== 'Edit Row'}" visible = "{=${action>/rowAction} !== 'Create'}" width =  "100%">
+    	   		<rules>
+    	   		    <MaskInputRule/>
+    	   		</rules>
+	   		</MaskInput>
+	   	</VBox>-->
+	   	</content>
+	     <beginButton>
+		   	<Button 
+			 id = "addDialogButton"
+			 text  = "Save"
+			 press = "onPressSaveEntry"
+			 class = "sapUiSmallMarginEnd"
+			 type = "Transparent"/>
+		 </beginButton>
+	    <endButton>
+		   	<Button 
+			 id = "closeDialogButton"
+			 text  = "Cancel"
+			 press = "onPressCancelEntry"
+			 class = "sapUiSmallMarginEnd"
+			 type = "Transparent"/>
+		 </endButton>
+   	</Dialog>
+</core:FragmentDefinition>
