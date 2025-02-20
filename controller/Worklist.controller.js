@@ -1327,22 +1327,7 @@ sap.ui.define(
     			.resetChanges();
     		this.onCloseDialogs()
     		this.unlockKeys()
-    	},
-    	
-    	/*filt: function(){
-        var a = []
-        var data = ['AF', 'AF', 'SV', 'FG' , 'AF']
-        for (var i = 0; i<data.length;i++){
-            if(a.indexOf(data[i])=== -1){
-                a.push(data[i])
-            } 
-        }
-            console.log(a)
-            return a
-        }*/
-        /*filt:function(){
-            this.getModel().remove("/vDomensType('ttt')")
-        }*/
+    	}
      });
   }
 );
